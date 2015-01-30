@@ -624,6 +624,40 @@ describe('Query', function () {
       cond.format().should.eql(expected);
     });
 
+    it('should have notEquals clause', function() {
+      // TODO ther is a bug in the dynamodb-doc lib
+      // that needs to get fixed before this test can pass
+      query = query.filter('age').notEquals(5);
+
+      var expected = {
+        AttributeValueList: [
+          {N: '5'},
+        ],
+        ComparisonOperator: 'NE'
+      };
+
+      query.request.QueryFilter.should.have.length(1);
+      var cond = _.first(query.request.QueryFilter);
+      cond.format().should.eql(expected);
+    });
+
+    it('should have notEquals NumberArray clause', function() {
+      // TODO ther is a bug in the dynamodb-doc lib
+      // that needs to get fixed before this test can pass
+      query = query.filter('age').notEquals([5, 6, 7]);
+
+      var expected = {
+        AttributeValueList: [
+          {NS: ['5', '6', '7']},
+        ],
+        ComparisonOperator: 'NE'
+      };
+
+      query.request.QueryFilter.should.have.length(1);
+      var cond = _.first(query.request.QueryFilter);
+      cond.format().should.eql(expected);
+    });
+
   });
 
   describe('#loadAll', function () {
