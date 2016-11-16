@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "2.1.x",
-    "dynamodb-doc": "otolab/dynamodb-document-js-sdk",
+    "dynamodb-doc": "git://github.com/otolab/dynamodb-document-js-sdk.git",
     "lodash": "2.4.x",
     "joi": "5.x.x",
     "node-uuid": "1.4.x",
